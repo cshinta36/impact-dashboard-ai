@@ -39,6 +39,7 @@ export function Users() {
   const [sortColumn, setSortColumn] = useState<string>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [filterType, setFilterType] = useState<'all' | 'active' | 'admin'>('all');
   
   // Form state
   const [selectedClient, setSelectedClient] = useState('');
@@ -254,7 +255,7 @@ export function Users() {
               e.stopPropagation();
               handleEditClick(row);
             }}
-            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors cursor-pointer"
             title="Edit user"
           >
             <Edit2 className="w-4 h-4" />
@@ -265,11 +266,18 @@ export function Users() {
   ];
 
   const filteredAndSortedUsers = useMemo(() => {
-    const filtered = users.filter(user =>
+    let filtered = users.filter(user =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.client.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // Apply filter type
+    if (filterType === 'active') {
+      filtered = filtered.filter(user => user.status === 'active');
+    } else if (filterType === 'admin') {
+      filtered = filtered.filter(user => user.role === 'admin');
+    }
 
     // Sort
     const sorted = [...filtered].sort((a, b) => {
@@ -287,7 +295,7 @@ export function Users() {
     });
 
     return sorted;
-  }, [users, searchQuery, sortColumn, sortDirection]);
+  }, [users, searchQuery, sortColumn, sortDirection, filterType]);
 
   return (
     <div className="h-full flex flex-col bg-background">
@@ -324,30 +332,51 @@ export function Users() {
 
           {/* Summary Stats */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-card border border-border rounded-lg p-4">
+            <button
+              onClick={() => setFilterType('all')}
+              className={`bg-card border rounded-lg p-4 text-left transition-all cursor-pointer ${
+                filterType === 'all' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
               <p className="text-[12px] uppercase tracking-wide text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
                 Total Users
               </p>
               <p className="text-[24px] text-foreground mt-2" style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}>
                 {users.length}
               </p>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-4">
+            </button>
+            <button
+              onClick={() => setFilterType('active')}
+              className={`bg-card border rounded-lg p-4 text-left transition-all cursor-pointer ${
+                filterType === 'active' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
               <p className="text-[12px] uppercase tracking-wide text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
                 Active
               </p>
               <p className="text-[24px] text-chart-3 mt-2" style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}>
                 {users.filter(u => u.status === 'active').length}
               </p>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-4">
+            </button>
+            <button
+              onClick={() => setFilterType('admin')}
+              className={`bg-card border rounded-lg p-4 text-left transition-all cursor-pointer ${
+                filterType === 'admin' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
               <p className="text-[12px] uppercase tracking-wide text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
                 Admins
               </p>
               <p className="text-[24px] text-foreground mt-2" style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}>
                 {users.filter(u => u.role === 'admin').length}
               </p>
-            </div>
+            </button>
           </div>
 
           {/* Table */}

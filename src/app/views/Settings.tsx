@@ -1,12 +1,15 @@
 import { PageHeader } from '../components/PageHeader';
 import { Button } from '../components/Button';
-import { User, Lock, Palette, Bell, Sun, Moon, Monitor } from 'lucide-react';
+import { User, Lock, Palette, Bell, Sun, Moon, Monitor, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
+import { Setup2FAModal } from '@/app/components/modals/Setup2FAModal';
 
 export function Settings() {
   const [activeTab, setActiveTab] = useState<'profile' | 'security' | 'appearance' | 'notifications'>('profile');
   const { theme, setTheme } = useTheme();
+  const [is2FAModalOpen, setIs2FAModalOpen] = useState(false);
+  const [is2FAEnabled, setIs2FAEnabled] = useState(false);
 
   const tabs = [
     { id: 'profile' as const, label: 'Profile', icon: User },
@@ -46,7 +49,7 @@ export function Settings() {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`
-                      flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 border-b-2 transition-colors whitespace-nowrap flex-shrink-0
+                      flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 border-b-2 transition-colors whitespace-nowrap flex-shrink-0 cursor-pointer
                       ${isActive 
                         ? 'border-accent text-accent' 
                         : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -201,7 +204,12 @@ export function Settings() {
                   >
                     Add an extra layer of security to your account
                   </p>
-                  <Button variant="secondary">Enable 2FA</Button>
+                  <Button 
+                    variant="secondary"
+                    onClick={() => setIs2FAModalOpen(true)}
+                  >
+                    {is2FAEnabled ? 'Manage 2FA' : 'Enable 2FA'}
+                  </Button>
                 </div>
               </div>
             )}
@@ -230,7 +238,7 @@ export function Settings() {
                         <button 
                           onClick={() => setTheme('light')}
                           className={`
-                            flex flex-col items-center gap-2 p-4 rounded-lg transition-colors
+                            flex flex-col items-center gap-2 p-4 rounded-lg transition-colors cursor-pointer
                             ${theme === 'light' 
                               ? 'border-2 border-accent bg-accent/5' 
                               : 'border border-border hover:border-accent/50'
@@ -238,7 +246,7 @@ export function Settings() {
                           `}
                         >
                           <div className="w-12 h-12 bg-white border border-border rounded-md flex items-center justify-center">
-                            <Sun className="w-6 h-6 text-foreground" />
+                            <Sun className="w-6 h-6 text-gray-800" />
                           </div>
                           <span 
                             className={`text-[13px] ${theme === 'light' ? 'text-accent' : 'text-muted-foreground'}`}
@@ -252,7 +260,7 @@ export function Settings() {
                         <button 
                           onClick={() => setTheme('dark')}
                           className={`
-                            flex flex-col items-center gap-2 p-4 rounded-lg transition-colors
+                            flex flex-col items-center gap-2 p-4 rounded-lg transition-colors cursor-pointer
                             ${theme === 'dark' 
                               ? 'border-2 border-accent bg-accent/5' 
                               : 'border border-border hover:border-accent/50'
@@ -274,7 +282,7 @@ export function Settings() {
                         <button 
                           onClick={() => setTheme('auto')}
                           className={`
-                            flex flex-col items-center gap-2 p-4 rounded-lg transition-colors
+                            flex flex-col items-center gap-2 p-4 rounded-lg transition-colors cursor-pointer
                             ${theme === 'auto' 
                               ? 'border-2 border-accent bg-accent/5' 
                               : 'border border-border hover:border-accent/50'
@@ -349,6 +357,13 @@ export function Settings() {
           </div>
         </div>
       </div>
+
+      {/* 2FA Modal */}
+      <Setup2FAModal
+        isOpen={is2FAModalOpen}
+        onClose={() => setIs2FAModalOpen(false)}
+        onSuccess={() => setIs2FAEnabled(true)}
+      />
     </div>
   );
 }

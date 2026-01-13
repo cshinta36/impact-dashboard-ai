@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from '@/app/contexts/AuthContext';
 import { Layout } from '@/app/components/Layout';
 import { Dashboard } from '@/app/views/Dashboard';
@@ -9,14 +9,29 @@ import { Users } from '@/app/views/Users';
 import { Settings } from '@/app/views/Settings';
 import { Login } from '@/app/views/Login';
 import { ForgotPassword } from '@/app/views/ForgotPassword';
+import { ResetPassword } from '@/app/views/ResetPassword';
 
 type View = 'dashboard' | 'exports' | 'projects' | 'clients' | 'users' | 'settings';
-type AuthView = 'login' | 'forgot-password';
+type AuthView = 'login' | 'forgot-password' | 'reset-password';
 
 function AppContent() {
   const { isAuthenticated, isLoading } = useAuth();
   const [activeView, setActiveView] = useState<View>('dashboard');
   const [authView, setAuthView] = useState<AuthView>('login');
+  const [resetToken, setResetToken] = useState<string>('');
+
+  // Check for reset password token in URL on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    
+    if (token) {
+      setResetToken(token);
+      setAuthView('reset-password');
+      // Clean up URL
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
 
   // Show loading state while checking authentication
   if (isLoading) {
@@ -39,6 +54,9 @@ function AppContent() {
   if (!isAuthenticated) {
     if (authView === 'forgot-password') {
       return <ForgotPassword onBackToLogin={() => setAuthView('login')} />;
+    }
+    if (authView === 'reset-password') {
+      return <ResetPassword token={resetToken} onSuccess={() => setAuthView('login')} />;
     }
     return <Login onForgotPassword={() => setAuthView('forgot-password')} />;
   }

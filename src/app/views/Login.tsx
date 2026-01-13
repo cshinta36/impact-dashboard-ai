@@ -127,7 +127,7 @@ export function Login({ onForgotPassword }: LoginProps) {
             </p>
             <button
               onClick={toggleDev2FA}
-              className={`px-3 py-1 rounded text-[11px] transition-colors ${
+              className={`px-3 py-1 rounded text-[11px] transition-colors cursor-pointer ${
                 dev2FAEnabled 
                   ? 'bg-chart-3 text-white' 
                   : 'bg-secondary text-foreground border border-border'
@@ -230,7 +230,7 @@ export function Login({ onForgotPassword }: LoginProps) {
                 type="button"
                 onClick={handleBack}
                 disabled={isLoading}
-                className="w-full px-6 py-3 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[14px]"
+                className="w-full px-6 py-3 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-[14px]"
                 style={{ 
                   fontFamily: 'var(--font-family-body)',
                   fontWeight: 'var(--font-weight-medium)'
@@ -258,7 +258,7 @@ export function Login({ onForgotPassword }: LoginProps) {
           </p>
           <button
             onClick={toggleDev2FA}
-            className={`px-3 py-1 rounded text-[11px] transition-colors ${
+            className={`px-3 py-1 rounded text-[11px] transition-colors cursor-pointer ${
               dev2FAEnabled 
                 ? 'bg-chart-3 text-white' 
                 : 'bg-secondary text-foreground border border-border'
@@ -348,7 +348,7 @@ export function Login({ onForgotPassword }: LoginProps) {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   {showPassword ? (
                     <EyeOff className="w-4 h-4" />
@@ -374,7 +374,7 @@ export function Login({ onForgotPassword }: LoginProps) {
               <button
                 type="button"
                 onClick={onForgotPassword}
-                className="text-[13px] text-accent hover:text-accent/80 transition-colors"
+                className="text-[13px] text-accent hover:text-accent/80 transition-colors cursor-pointer"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 Forgot password?
@@ -385,7 +385,7 @@ export function Login({ onForgotPassword }: LoginProps) {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full px-6 py-3 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[14px]"
+              className="w-full px-6 py-3 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-[14px]"
               style={{ 
                 fontFamily: 'var(--font-family-body)',
                 fontWeight: 'var(--font-weight-medium)'

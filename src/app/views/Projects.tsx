@@ -2,7 +2,7 @@ import { PageHeader } from '../components/PageHeader';
 import { Button } from '../components/Button';
 import { DataTable, Column } from '../components/DataTable';
 import { StatusPill } from '../components/StatusPill';
-import { Plus, Search, Edit2 } from 'lucide-react';
+import { Plus, Search, Edit2, Eye, EyeOff } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { AddProjectModal } from '../components/modals/AddProjectModal';
 import { 
@@ -46,6 +46,7 @@ export function Projects() {
   const [sortColumn, setSortColumn] = useState<string>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
+  const [showApiKey, setShowApiKey] = useState(false);
 
   // Mock clients data
   const clients = [
@@ -254,7 +255,7 @@ export function Projects() {
               e.stopPropagation();
               handleEditProject(row);
             }}
-            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors cursor-pointer"
             title="Edit project"
           >
             <Edit2 className="w-4 h-4" />
@@ -336,7 +337,7 @@ export function Projects() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             <button
               onClick={() => setStatusFilter('all')}
-              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all ${
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
                 statusFilter === 'all' 
                   ? 'border-accent shadow-sm' 
                   : 'border-border hover:border-accent/50'
@@ -357,7 +358,7 @@ export function Projects() {
             </button>
             <button
               onClick={() => setStatusFilter('active')}
-              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all ${
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
                 statusFilter === 'active' 
                   ? 'border-accent shadow-sm' 
                   : 'border-border hover:border-accent/50'
@@ -378,7 +379,7 @@ export function Projects() {
             </button>
             <button
               onClick={() => setStatusFilter('inactive')}
-              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all ${
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
                 statusFilter === 'inactive' 
                   ? 'border-accent shadow-sm' 
                   : 'border-border hover:border-accent/50'
@@ -469,14 +470,27 @@ export function Projects() {
               >
                 Chatbot API Key <span className="text-muted-foreground/70">(This will be encrypted in database)</span> <span className="text-destructive">*</span>
               </label>
-              <input
-                type="text"
-                placeholder="VF.DM.xxxxxxxx"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-11"
-                style={{ fontFamily: 'var(--font-family-body)' }}
-              />
+              <div className="relative">
+                <input
+                  type={showApiKey ? "text" : "password"}
+                  placeholder="VF.DM.xxxxxxxx"
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  className="w-full px-3 py-2 pr-10 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-11"
+                  style={{ fontFamily: 'var(--font-family-body)' }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowApiKey(!showApiKey)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                >
+                  {showApiKey ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Client and Project Name in two columns */}

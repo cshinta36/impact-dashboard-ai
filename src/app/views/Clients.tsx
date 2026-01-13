@@ -40,6 +40,7 @@ export function Clients() {
   const [editingClient, setEditingClient] = useState<Client | null>(null);
   const [sortColumn, setSortColumn] = useState<string>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
 
   const handleAddClient = () => {
     console.log('Adding client:', { businessName, firstName, lastName, email, clientStatus });
@@ -199,7 +200,7 @@ export function Clients() {
               e.stopPropagation();
               handleEditClient(row);
             }}
-            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors cursor-pointer"
             title="Edit client"
           >
             <Edit2 className="w-4 h-4" />
@@ -210,13 +211,18 @@ export function Clients() {
   ];
 
   const filteredAndSortedClients = useMemo(() => {
-    const filtered = clients.filter(client => 
+    let filtered = clients.filter(client => 
       client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       client.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
       client.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       client.lastName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       client.email?.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // Apply status filter
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(client => client.status === statusFilter);
+    }
 
     // Sort
     const sorted = [...filtered].sort((a, b) => {
@@ -239,7 +245,7 @@ export function Clients() {
     });
 
     return sorted;
-  }, [clients, searchQuery, sortColumn, sortDirection]);
+  }, [clients, searchQuery, sortColumn, sortDirection, statusFilter]);
 
   return (
     <div className="h-full flex flex-col bg-background">
@@ -276,30 +282,69 @@ export function Clients() {
 
           {/* Summary Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-            <div className="bg-card p-4 rounded-lg shadow-sm">
-              <div className="text-[14px] text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+            <button
+              onClick={() => setStatusFilter('all')}
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
+                statusFilter === 'all' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
+              <p 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
+                style={{ fontFamily: 'var(--font-family-body)' }}
+              >
                 Total Clients
-              </div>
-              <div className="text-[20px] font-bold text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+              </p>
+              <p 
+                className="text-[20px] sm:text-[24px] text-foreground mt-1 sm:mt-2" 
+                style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
+              >
                 {clients.length}
-              </div>
-            </div>
-            <div className="bg-card p-4 rounded-lg shadow-sm">
-              <div className="text-[14px] text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
-                Active Clients
-              </div>
-              <div className="text-[20px] font-bold text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+              </p>
+            </button>
+            <button
+              onClick={() => setStatusFilter('active')}
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
+                statusFilter === 'active' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
+              <p 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
+                style={{ fontFamily: 'var(--font-family-body)' }}
+              >
+                Active
+              </p>
+              <p 
+                className="text-[20px] sm:text-[24px] text-chart-3 mt-1 sm:mt-2" 
+                style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
+              >
                 {clients.filter(client => client.status === 'active').length}
-              </div>
-            </div>
-            <div className="bg-card p-4 rounded-lg shadow-sm">
-              <div className="text-[14px] text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
-                Inactive Clients
-              </div>
-              <div className="text-[20px] font-bold text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+              </p>
+            </button>
+            <button
+              onClick={() => setStatusFilter('inactive')}
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
+                statusFilter === 'inactive' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
+              <p 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
+                style={{ fontFamily: 'var(--font-family-body)' }}
+              >
+                Inactive
+              </p>
+              <p 
+                className="text-[20px] sm:text-[24px] text-muted-foreground mt-1 sm:mt-2" 
+                style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
+              >
                 {clients.filter(client => client.status === 'inactive').length}
-              </div>
-            </div>
+              </p>
+            </button>
           </div>
 
           {/* Table */}

@@ -190,7 +190,7 @@ export function AddClientModal({ open, onOpenChange, onSubmit }: AddClientModalP
           <button
             type="button"
             onClick={handleCancel}
-            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors text-[13px] sm:text-[14px] w-full sm:w-auto"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors text-[13px] sm:text-[14px] w-full sm:w-auto cursor-pointer"
             style={{ 
               fontFamily: 'var(--font-family-body)',
               fontWeight: 'var(--font-weight-medium)'
@@ -202,7 +202,7 @@ export function AddClientModal({ open, onOpenChange, onSubmit }: AddClientModalP
             type="button"
             onClick={handleSubmit}
             disabled={!companyName || !firstName || !lastName || !contactEmail}
-            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[13px] sm:text-[14px] w-full sm:w-auto"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[13px] sm:text-[14px] w-full sm:w-auto cursor-pointer"
             style={{ 
               fontFamily: 'var(--font-family-body)',
               fontWeight: 'var(--font-weight-medium)'

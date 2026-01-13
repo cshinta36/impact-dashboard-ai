@@ -276,7 +276,7 @@ export function Dashboard({ onNavigate }: DashboardProps = {}) {
                     Action
                   </label>
                   <button 
-                    className="w-full bg-foreground text-background px-6 py-2.5 rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors flex items-center justify-center gap-2 h-11"
+                    className="w-full bg-foreground text-background px-6 py-2.5 rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors flex items-center justify-center gap-2 h-11 cursor-pointer"
                     style={{ fontFamily: 'var(--font-family-body)', fontWeight: 'var(--font-weight-medium)' }}
                     onClick={() => {
                       console.log('Queue export for:', selectedProject, dateRange);
@@ -382,7 +382,7 @@ export function Dashboard({ onNavigate }: DashboardProps = {}) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <button 
                 onClick={() => setIsAddClientModalOpen(true)}
-                className="flex flex-col items-start p-4 border border-border rounded-lg hover:bg-secondary/30 transition-colors text-left"
+                className="flex flex-col items-start p-4 border border-border rounded-lg hover:bg-secondary/30 hover:border-accent/50 transition-colors text-left cursor-pointer"
               >
                 <Building2 className="w-5 h-5 text-accent mb-2" />
                 <span 
@@ -401,7 +401,7 @@ export function Dashboard({ onNavigate }: DashboardProps = {}) {
 
               <button 
                 onClick={() => setIsAddProjectModalOpen(true)}
-                className="flex flex-col items-start p-4 border border-border rounded-lg hover:bg-secondary/30 transition-colors text-left"
+                className="flex flex-col items-start p-4 border border-border rounded-lg hover:bg-secondary/30 hover:border-accent/50 transition-colors text-left cursor-pointer"
               >
                 <MessageSquare className="w-5 h-5 text-accent mb-2" />
                 <span 
@@ -420,7 +420,7 @@ export function Dashboard({ onNavigate }: DashboardProps = {}) {
 
               <button 
                 onClick={() => setIsAddUserModalOpen(true)}
-                className="flex flex-col items-start p-4 border border-border rounded-lg hover:bg-secondary/30 transition-colors text-left"
+                className="flex flex-col items-start p-4 border border-border rounded-lg hover:bg-secondary/30 hover:border-accent/50 transition-colors text-left cursor-pointer"
               >
                 <UserPlus className="w-5 h-5 text-accent mb-2" />
                 <span 

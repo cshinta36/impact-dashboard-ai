@@ -66,7 +66,7 @@ export function DataTable<T extends Record<string, any>>({
                           ? column.onSort()
                           : onSort && onSort(column.key)
                       }
-                      className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground hover:text-foreground transition-colors"
+                      className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                       style={{
                         fontFamily: "var(--font-family-body)",
                         fontWeight: "var(--font-weight-medium)",
@@ -125,7 +125,7 @@ export function DataTable<T extends Record<string, any>>({
                   <td className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
                     <button
                       onClick={() => onRowAction(row)}
-                      className="text-muted-foreground hover:text-foreground transition-colors p-1"
+                      className="text-muted-foreground hover:text-foreground transition-colors p-1 cursor-pointer"
                     >
                       <MoreVertical className="w-4 h-4" />
                     </button>

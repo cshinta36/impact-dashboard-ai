@@ -54,7 +54,7 @@ export function UserMenu({ onNavigate }: UserMenuProps) {
       {/* User Profile Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-sidebar-accent/30 transition-colors"
+        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-sidebar-accent/30 transition-colors cursor-pointer"
       >
         <div className="w-8 h-8 rounded-full bg-sidebar-primary flex items-center justify-center flex-shrink-0">
           <span className="text-[12px] text-sidebar-primary-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
@@ -106,7 +106,7 @@ export function UserMenu({ onNavigate }: UserMenuProps) {
           <div className="py-1">
             <button
               onClick={handleSettingsClick}
-              className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-secondary/50 transition-colors"
+              className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-secondary/50 transition-colors cursor-pointer"
             >
               <Settings className="w-4 h-4 text-muted-foreground" />
               <span className="text-[14px] text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
@@ -116,7 +116,7 @@ export function UserMenu({ onNavigate }: UserMenuProps) {
             
             <button
               onClick={handleLogoutClick}
-              className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-secondary/50 transition-colors"
+              className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-secondary/50 transition-colors cursor-pointer"
             >
               <LogOut className="w-4 h-4 text-muted-foreground" />
               <span className="text-[14px] text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>

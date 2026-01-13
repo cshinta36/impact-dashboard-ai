@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import { 
   Dialog, 
   DialogContent,
@@ -40,6 +41,7 @@ export function AddProjectModal({ open, onOpenChange, clients, onSubmit }: AddPr
   const [projectId, setProjectId] = useState('');
   const [apiKey, setApiKey] = useState('');
   const [projectStatus, setProjectStatus] = useState<'active' | 'inactive'>('active');
+  const [showApiKey, setShowApiKey] = useState(false);
 
   const handleSubmit = () => {
     if (onSubmit) {
@@ -116,14 +118,23 @@ export function AddProjectModal({ open, onOpenChange, clients, onSubmit }: AddPr
             >
               Chatbot API Key <span className="text-muted-foreground/70 text-[10px] sm:text-[11px]">(This will be encrypted in database)</span> <span className="text-destructive">*</span>
             </label>
-            <input
-              type="text"
-              placeholder="VF.DM.xxxxxxxx"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 sm:h-11"
-              style={{ fontFamily: 'var(--font-family-body)' }}
-            />
+            <div className="relative">
+              <input
+                type={showApiKey ? "text" : "password"}
+                placeholder="VF.DM.xxxxxxxx"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 sm:h-11"
+                style={{ fontFamily: 'var(--font-family-body)' }}
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-accent"
+                onClick={() => setShowApiKey(!showApiKey)}
+              >
+                {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
           </div>
 
           {/* Client and Project Name in two columns */}
@@ -206,7 +217,7 @@ export function AddProjectModal({ open, onOpenChange, clients, onSubmit }: AddPr
           <button
             type="button"
             onClick={handleCancel}
-            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors text-[13px] sm:text-[14px] w-full sm:w-auto"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors text-[13px] sm:text-[14px] w-full sm:w-auto cursor-pointer"
             style={{ 
               fontFamily: 'var(--font-family-body)',
               fontWeight: 'var(--font-weight-medium)'
@@ -218,7 +229,7 @@ export function AddProjectModal({ open, onOpenChange, clients, onSubmit }: AddPr
             type="button"
             onClick={handleSubmit}
             disabled={!selectedClient || !projectName || !projectId || !apiKey}
-            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[13px] sm:text-[14px] w-full sm:w-auto"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[13px] sm:text-[14px] w-full sm:w-auto cursor-pointer"
             style={{ 
               fontFamily: 'var(--font-family-body)',
               fontWeight: 'var(--font-weight-medium)'

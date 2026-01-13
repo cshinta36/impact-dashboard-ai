@@ -46,6 +46,7 @@ export function Exports() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   const [deleteConfirmText, setDeleteConfirmText] = useState('');
   const [deletingExport, setDeletingExport] = useState<Export | null>(null);
+  const [statusFilter, setStatusFilter] = useState<'all' | 'completed' | 'processing' | 'failed'>('all');
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
     from: new Date(2025, 11, 1), // Dec 1, 2025
     to: new Date(2025, 11, 31) // Dec 31, 2025
@@ -331,6 +332,11 @@ export function Exports() {
       );
     }
 
+    // Filter by status
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(exp => exp.status === statusFilter);
+    }
+
     // Sort
     const sorted = [...filtered].sort((a, b) => {
       let aVal: any = a[sortColumn as keyof Export];
@@ -360,7 +366,7 @@ export function Exports() {
     });
 
     return sorted;
-  }, [allExports, searchQuery, sortColumn, sortDirection]);
+  }, [allExports, searchQuery, sortColumn, sortDirection, statusFilter]);
 
   const columns: Column<Export>[] = [
     {
@@ -446,7 +452,7 @@ export function Exports() {
               e.stopPropagation();
               handleDeleteExport(row);
             }}
-            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors cursor-pointer"
             title="Delete export"
           >
             <Trash2 className="w-4 h-4" />
@@ -487,6 +493,73 @@ export function Exports() {
                 style={{ fontFamily: 'var(--font-family-body)' }}
               />
             </div>
+          </div>
+
+          {/* Summary Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <button
+              onClick={() => setStatusFilter('completed')}
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
+                statusFilter === 'completed' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
+              <p 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
+                style={{ fontFamily: 'var(--font-family-body)' }}
+              >
+                Completed
+              </p>
+              <p 
+                className="text-[20px] sm:text-[24px] text-chart-3 mt-1 sm:mt-2" 
+                style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
+              >
+                {allExports.filter(exp => exp.status === 'completed').length}
+              </p>
+            </button>
+            <button
+              onClick={() => setStatusFilter('processing')}
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
+                statusFilter === 'processing' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
+              <p 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
+                style={{ fontFamily: 'var(--font-family-body)' }}
+              >
+                Processing
+              </p>
+              <p 
+                className="text-[20px] sm:text-[24px] text-chart-2 mt-1 sm:mt-2" 
+                style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
+              >
+                {allExports.filter(exp => exp.status === 'processing' || exp.status === 'queued').length}
+              </p>
+            </button>
+            <button
+              onClick={() => setStatusFilter('failed')}
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all cursor-pointer ${
+                statusFilter === 'failed' 
+                  ? 'border-accent shadow-sm' 
+                  : 'border-border hover:border-accent/50'
+              }`}
+            >
+              <p 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
+                style={{ fontFamily: 'var(--font-family-body)' }}
+              >
+                Failed
+              </p>
+              <p 
+                className="text-[20px] sm:text-[24px] text-chart-1 mt-1 sm:mt-2" 
+                style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
+              >
+                {allExports.filter(exp => exp.status === 'failed').length}
+              </p>
+            </button>
           </div>
 
           {/* Table */}
