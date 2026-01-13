@@ -258,7 +258,7 @@ export function Clients() {
       />
 
       <div className="flex-1 overflow-auto">
-        <div className="p-8 space-y-6">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
           {/* Search */}
           <div className="flex items-center gap-3">
             <div className="flex-1 relative">
@@ -268,9 +268,37 @@ export function Clients() {
                 placeholder="Search clients..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               />
+            </div>
+          </div>
+
+          {/* Summary Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="bg-card p-4 rounded-lg shadow-sm">
+              <div className="text-[14px] text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+                Total Clients
+              </div>
+              <div className="text-[20px] font-bold text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+                {clients.length}
+              </div>
+            </div>
+            <div className="bg-card p-4 rounded-lg shadow-sm">
+              <div className="text-[14px] text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+                Active Clients
+              </div>
+              <div className="text-[20px] font-bold text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+                {clients.filter(client => client.status === 'active').length}
+              </div>
+            </div>
+            <div className="bg-card p-4 rounded-lg shadow-sm">
+              <div className="text-[14px] text-muted-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+                Inactive Clients
+              </div>
+              <div className="text-[20px] font-bold text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
+                {clients.filter(client => client.status === 'inactive').length}
+              </div>
             </div>
           </div>
 

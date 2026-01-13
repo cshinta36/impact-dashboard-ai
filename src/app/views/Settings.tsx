@@ -23,10 +23,21 @@ export function Settings() {
       />
 
       <div className="flex-1 overflow-auto">
-        <div className="p-8">
-          <div className="max-w-4xl mx-auto">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
+          {/* Account Settings Card */}
+          <div className="bg-card border border-border rounded-[var(--radius-card)] p-4 sm:p-6 lg:p-8">
+            <h2 
+              className="text-[18px] sm:text-[20px] text-foreground mb-4 sm:mb-6"
+              style={{ 
+                fontFamily: 'var(--font-family-display)',
+                fontWeight: 'var(--font-weight-normal)'
+              }}
+            >
+              Account Settings
+            </h2>
+
             {/* Tabs */}
-            <div className="flex gap-2 border-b border-border mb-8">
+            <div className="flex gap-1 sm:gap-2 border-b border-border mb-6 sm:mb-8 overflow-x-auto scrollbar-hide">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -35,7 +46,7 @@ export function Settings() {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`
-                      flex items-center gap-2 px-4 py-3 border-b-2 transition-colors
+                      flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 border-b-2 transition-colors whitespace-nowrap flex-shrink-0
                       ${isActive 
                         ? 'border-accent text-accent' 
                         : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -43,8 +54,8 @@ export function Settings() {
                     `}
                     style={{ fontFamily: 'var(--font-family-body)' }}
                   >
-                    <Icon className="w-4 h-4" />
-                    <span className="text-[14px]">{tab.label}</span>
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <span className="text-[12px] sm:text-[14px]">{tab.label}</span>
                   </button>
                 );
               })}

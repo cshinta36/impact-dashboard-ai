@@ -24,26 +24,26 @@ export function Sidebar({ activeView, onNavigate }: SidebarProps) {
   ];
 
   return (
-    <aside className="flex flex-col h-full bg-sidebar border-r border-sidebar-border w-60">
+    <aside className="flex flex-col h-full bg-sidebar border-r border-sidebar-border w-60 sm:w-64">
       {/* Logo/Brand Section */}
-      <div className="px-6 py-5 border-b border-sidebar-border">
+      <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-sidebar-border">
         <img 
           src={logoLight} 
           alt="Juicebox" 
-          className="h-7 w-auto dark:hidden"
+          className="h-6 sm:h-7 w-auto dark:hidden"
         />
         <img 
           src={logoDark} 
           alt="Juicebox" 
-          className="h-7 w-auto hidden dark:block"
+          className="h-6 sm:h-7 w-auto hidden dark:block"
         />
-        <p className="text-[12px] text-muted-foreground mt-2" style={{ fontFamily: 'var(--font-family-body)' }}>
+        <p className="text-[11px] sm:text-[12px] text-muted-foreground mt-2" style={{ fontFamily: 'var(--font-family-body)' }}>
           Impact Dashboard
         </p>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4">
+      <nav className="flex-1 px-2 sm:px-3 py-3 sm:py-4 overflow-y-auto">
         <ul className="space-y-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
@@ -64,7 +64,7 @@ export function Sidebar({ activeView, onNavigate }: SidebarProps) {
                   style={{ fontFamily: 'var(--font-family-body)' }}
                 >
                   <Icon className="w-4 h-4 flex-shrink-0" />
-                  <span className="text-[14px]">{item.label}</span>
+                  <span className="text-[13px] sm:text-[14px]">{item.label}</span>
                 </button>
               </li>
             );
@@ -73,7 +73,7 @@ export function Sidebar({ activeView, onNavigate }: SidebarProps) {
       </nav>
 
       {/* User Profile Section */}
-      <div className="border-t border-sidebar-border px-3 py-4">
+      <div className="border-t border-sidebar-border px-2 sm:px-3 py-3 sm:py-4">
         <UserMenu onNavigate={onNavigate} />
       </div>
     </aside>

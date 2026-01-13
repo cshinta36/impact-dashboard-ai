@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { Settings, LogOut, ChevronUp } from 'lucide-react';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 interface UserMenuProps {
   onNavigate: (view: string) => void;
-  onLogout?: () => void;
 }
 
-export function UserMenu({ onNavigate, onLogout }: UserMenuProps) {
+export function UserMenu({ onNavigate }: UserMenuProps) {
+  const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -33,12 +34,19 @@ export function UserMenu({ onNavigate, onLogout }: UserMenuProps) {
 
   const handleLogoutClick = () => {
     setIsOpen(false);
-    if (onLogout) {
-      onLogout();
-    } else {
-      console.log('Logging out...');
-      // Add logout logic here
-    }
+    logout();
+  };
+
+  // Get user initials
+  const getInitials = () => {
+    if (!user) return 'U';
+    return `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
+  };
+
+  // Get display name
+  const getDisplayName = () => {
+    if (!user) return 'User';
+    return `${user.firstName} ${user.lastName}`;
   };
 
   return (
@@ -50,15 +58,15 @@ export function UserMenu({ onNavigate, onLogout }: UserMenuProps) {
       >
         <div className="w-8 h-8 rounded-full bg-sidebar-primary flex items-center justify-center flex-shrink-0">
           <span className="text-[12px] text-sidebar-primary-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
-            SA
+            {getInitials()}
           </span>
         </div>
         <div className="flex-1 min-w-0 text-left">
           <p className="text-[13px] text-sidebar-foreground truncate" style={{ fontFamily: 'var(--font-family-body)' }}>
-            System Admin
+            {getDisplayName()}
           </p>
           <p className="text-[11px] text-muted-foreground truncate" style={{ fontFamily: 'var(--font-family-body)' }}>
-            admin@juicebox.ai
+            {user?.email || 'user@example.com'}
           </p>
         </div>
         <ChevronUp 
@@ -80,15 +88,15 @@ export function UserMenu({ onNavigate, onLogout }: UserMenuProps) {
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
                 <span className="text-[12px] text-foreground" style={{ fontFamily: 'var(--font-family-body)' }}>
-                  SA
+                  {getInitials()}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[13px] text-foreground truncate" style={{ fontFamily: 'var(--font-family-body)' }}>
-                  System Admin
+                  {getDisplayName()}
                 </p>
                 <p className="text-[11px] text-muted-foreground truncate" style={{ fontFamily: 'var(--font-family-body)' }}>
-                  admin@juicebox.ai
+                  {user?.email || 'user@example.com'}
                 </p>
               </div>
             </div>

@@ -88,10 +88,10 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle 
-            className="text-[18px] text-foreground"
+            className="text-[16px] sm:text-[18px] text-foreground"
             style={{ 
               fontFamily: 'var(--font-family-display)',
               fontWeight: 'var(--font-weight-normal)'
@@ -99,17 +99,17 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
           >
             User Details
           </DialogTitle>
-          <DialogDescription className="text-[14px] text-muted-foreground">
+          <DialogDescription className="text-[13px] sm:text-[14px] text-muted-foreground">
             Add a new user to your team.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
+        <div className="space-y-4 sm:space-y-6 py-3 sm:py-4">
           {/* First Name and Last Name in two columns */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label 
-                className="text-[12px] text-muted-foreground"
+                className="text-[11px] sm:text-[12px] text-muted-foreground"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 First Name <span className="text-destructive">*</span>
@@ -119,14 +119,14 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
                 placeholder="Enter first name"
                 value={userFirstName}
                 onChange={(e) => setUserFirstName(e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-11"
+                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 sm:h-11"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               />
             </div>
 
             <div className="space-y-2">
               <label 
-                className="text-[12px] text-muted-foreground"
+                className="text-[11px] sm:text-[12px] text-muted-foreground"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 Last Name <span className="text-destructive">*</span>
@@ -136,7 +136,7 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
                 placeholder="Enter last name"
                 value={userLastName}
                 onChange={(e) => setUserLastName(e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-11"
+                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 sm:h-11"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               />
             </div>
@@ -145,7 +145,7 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
           {/* Email - Full Width */}
           <div className="space-y-2">
             <label 
-              className="text-[12px] text-muted-foreground"
+              className="text-[11px] sm:text-[12px] text-muted-foreground"
               style={{ fontFamily: 'var(--font-family-body)' }}
             >
               Email <span className="text-destructive">*</span>
@@ -155,16 +155,16 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
               placeholder="email@example.com"
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-11"
+              className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 sm:h-11"
               style={{ fontFamily: 'var(--font-family-body)' }}
             />
           </div>
 
           {/* Password and Confirm Password in two columns */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label 
-                className="text-[12px] text-muted-foreground"
+                className="text-[11px] sm:text-[12px] text-muted-foreground"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 Password
@@ -174,14 +174,14 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
                 placeholder="Enter password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-11"
+                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 sm:h-11"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               />
             </div>
 
             <div className="space-y-2">
               <label 
-                className="text-[12px] text-muted-foreground"
+                className="text-[11px] sm:text-[12px] text-muted-foreground"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 Confirm Password
@@ -191,7 +191,7 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
                 placeholder="Confirm password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-11"
+                className="w-full px-3 py-2 border border-border rounded-lg bg-background hover:border-accent transition-colors text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 sm:h-11"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               />
             </div>
@@ -200,7 +200,7 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
           {/* Role */}
           <div className="space-y-3">
             <label 
-              className="text-[14px] text-foreground"
+              className="text-[13px] sm:text-[14px] text-foreground"
               style={{ 
                 fontFamily: 'var(--font-family-body)',
                 fontWeight: 'var(--font-weight-medium)'
@@ -209,7 +209,7 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
               Role
             </label>
             <p 
-              className="text-[12px] text-muted-foreground"
+              className="text-[11px] sm:text-[12px] text-muted-foreground"
               style={{ fontFamily: 'var(--font-family-body)' }}
             >
               Select one of the following roles for this user.
@@ -221,13 +221,13 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
                   <div className="flex-1">
                     <label 
                       htmlFor="role-superadmin" 
-                      className="text-[14px] text-foreground cursor-pointer block"
+                      className="text-[13px] sm:text-[14px] text-foreground cursor-pointer block"
                       style={{ fontFamily: 'var(--font-family-body)', fontWeight: 'var(--font-weight-medium)' }}
                     >
                       Super Admin
                     </label>
                     <p 
-                      className="text-[12px] text-muted-foreground mt-1"
+                      className="text-[11px] sm:text-[12px] text-muted-foreground mt-1"
                       style={{ fontFamily: 'var(--font-family-body)' }}
                     >
                       Full access to all features and settings
@@ -240,13 +240,13 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
                   <div className="flex-1">
                     <label 
                       htmlFor="role-client" 
-                      className="text-[14px] text-foreground cursor-pointer block"
+                      className="text-[13px] sm:text-[14px] text-foreground cursor-pointer block"
                       style={{ fontFamily: 'var(--font-family-body)', fontWeight: 'var(--font-weight-medium)' }}
                     >
                       Client
                     </label>
                     <p 
-                      className="text-[12px] text-muted-foreground mt-1"
+                      className="text-[11px] sm:text-[12px] text-muted-foreground mt-1"
                       style={{ fontFamily: 'var(--font-family-body)' }}
                     >
                       Access to assigned projects and associated export file(s)
@@ -316,11 +316,11 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
           </div>
         </div>
 
-        <DialogFooter className="gap-3">
+        <DialogFooter className="gap-2 sm:gap-3">
           <button
             type="button"
             onClick={handleCancel}
-            className="px-6 py-2.5 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors text-[14px]"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-secondary text-foreground border border-border rounded-[var(--radius-button)] hover:bg-secondary/80 transition-colors text-[13px] sm:text-[14px] w-full sm:w-auto"
             style={{ 
               fontFamily: 'var(--font-family-body)',
               fontWeight: 'var(--font-weight-medium)'
@@ -332,7 +332,7 @@ export function AddUserModal({ open, onOpenChange, clients, onSubmit }: AddUserM
             type="button"
             onClick={handleSubmit}
             disabled={!userFirstName || !userLastName || !userEmail || (selectedRole === 'client' && !selectedClient)}
-            className="px-6 py-2.5 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[14px]"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-foreground text-background rounded-[var(--radius-button)] hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[13px] sm:text-[14px] w-full sm:w-auto"
             style={{ 
               fontFamily: 'var(--font-family-body)',
               fontWeight: 'var(--font-weight-medium)'

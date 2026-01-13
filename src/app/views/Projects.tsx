@@ -316,7 +316,7 @@ export function Projects() {
       />
 
       <div className="flex-1 overflow-auto">
-        <div className="p-8 space-y-6">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
           {/* Search */}
           <div className="flex items-center gap-3">
             <div className="flex-1 relative">
@@ -326,30 +326,30 @@ export function Projects() {
                 placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg text-[13px] sm:text-[14px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 style={{ fontFamily: 'var(--font-family-body)' }}
               />
             </div>
           </div>
 
           {/* Summary Stats */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             <button
               onClick={() => setStatusFilter('all')}
-              className={`bg-card border rounded-lg p-4 text-left transition-all ${
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all ${
                 statusFilter === 'all' 
                   ? 'border-accent shadow-sm' 
                   : 'border-border hover:border-accent/50'
               }`}
             >
               <p 
-                className="text-[12px] uppercase tracking-wide text-muted-foreground" 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 Total Projects
               </p>
               <p 
-                className="text-[24px] text-foreground mt-2" 
+                className="text-[20px] sm:text-[24px] text-foreground mt-1 sm:mt-2" 
                 style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
               >
                 8
@@ -357,20 +357,20 @@ export function Projects() {
             </button>
             <button
               onClick={() => setStatusFilter('active')}
-              className={`bg-card border rounded-lg p-4 text-left transition-all ${
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all ${
                 statusFilter === 'active' 
                   ? 'border-accent shadow-sm' 
                   : 'border-border hover:border-accent/50'
               }`}
             >
               <p 
-                className="text-[12px] uppercase tracking-wide text-muted-foreground" 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 Active
               </p>
               <p 
-                className="text-[24px] text-chart-3 mt-2" 
+                className="text-[20px] sm:text-[24px] text-chart-3 mt-1 sm:mt-2" 
                 style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
               >
                 5
@@ -378,20 +378,20 @@ export function Projects() {
             </button>
             <button
               onClick={() => setStatusFilter('inactive')}
-              className={`bg-card border rounded-lg p-4 text-left transition-all ${
+              className={`bg-card border rounded-lg p-3 sm:p-4 text-left transition-all ${
                 statusFilter === 'inactive' 
                   ? 'border-accent shadow-sm' 
                   : 'border-border hover:border-accent/50'
               }`}
             >
               <p 
-                className="text-[12px] uppercase tracking-wide text-muted-foreground" 
+                className="text-[11px] sm:text-[12px] uppercase tracking-wide text-muted-foreground" 
                 style={{ fontFamily: 'var(--font-family-body)' }}
               >
                 Inactive
               </p>
               <p 
-                className="text-[24px] text-muted-foreground mt-2" 
+                className="text-[20px] sm:text-[24px] text-muted-foreground mt-1 sm:mt-2" 
                 style={{ fontFamily: 'var(--font-family-display)', fontWeight: 'var(--font-weight-light)' }}
               >
                 3

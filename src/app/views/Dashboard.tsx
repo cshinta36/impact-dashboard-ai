@@ -181,26 +181,30 @@ export function Dashboard({ onNavigate }: DashboardProps = {}) {
       />
 
       <div className="flex-1 overflow-auto">
-        <div className="p-8 space-y-8">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
           {/* Workspace-Specific Section - Visually Distinct Container */}
-          <div className="bg-card border-2 border-border rounded-[var(--radius-card)] p-8 shadow-sm">
+          <div className="bg-card border-2 border-border rounded-[var(--radius-card)] p-4 sm:p-6 lg:p-8 shadow-sm">
             {/* Export Transcripts Section */}
-            <div className="mb-8">
-              <h2 
-                className="text-[18px] text-foreground mb-2"
-                style={{ 
-                  fontFamily: 'var(--font-family-display)',
-                  fontWeight: 'var(--font-weight-normal)'
-                }}
-              >
-                Export Transcripts
-              </h2>
-              <p 
-                className="text-[14px] text-muted-foreground mb-6"
-                style={{ fontFamily: 'var(--font-family-body)' }}
-              >
-                Queue transcript export (CSV file) for the selected workspace and date range.
-              </p>
+            <div className="mb-6 sm:mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div className="flex-1 min-w-0">
+                  <h2 
+                    className="text-[18px] sm:text-[20px] lg:text-[22px] text-foreground"
+                    style={{ 
+                      fontFamily: 'var(--font-family-display)',
+                      fontWeight: 'var(--font-weight-normal)'
+                    }}
+                  >
+                    Export Transcripts
+                  </h2>
+                  <p 
+                    className="text-[12px] sm:text-[13px] text-muted-foreground mt-1"
+                    style={{ fontFamily: 'var(--font-family-body)' }}
+                  >
+                    Download conversation data as CSV
+                  </p>
+                </div>
+              </div>
 
               {/* Export Form Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
